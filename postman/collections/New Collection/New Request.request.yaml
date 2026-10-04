@@ -1,19 +1,19 @@
 $kind: http-request
-url: http://localhost:3000/camping-gears/1
-method: GET
+url: http://localhost:3000/camping-gears/5
+method: PUT
 body:
   type: json
   content: "{\r
 
-    \  \"namaAlat\": \"Tenda Dome 4 Orang\",\r
+    \  \"namaAlat\": \"Matras Camping Premium\",\r
 
     \  \"kategori\": \"tenda\",\r
 
-    \  \"kapasitas\": 4,\r
+    \  \"kapasitas\": 2,\r
 
-    \  \"hargaSewaPerHari\": 50000,\r
+    \  \"hargaSewaPerHari\": 25000,\r
 
-    \  \"stok\": 6\r
+    \  \"stok\": 15\r
 
     }"
 order: 1791125221900
