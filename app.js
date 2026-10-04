@@ -38,14 +38,33 @@ let campingGears = [
 
 let nextId = 4;
 
+const kategoriValid = [
+  "tenda",
+  "tas",
+  "masak",
+  "penerangan"
+];
+
 app.get('/camping-gears', (req, res) => {
-  res.json(campingGears);
+  const { kategori } = req.query;
+
+  let data = campingGears;
+
+  if (kategori) {
+    data = campingGears.filter(
+      (item) => item.kategori === kategori
+    );
+  }
+
+  res.status(200).json(data);
 });
 
 app.get('/camping-gears/:id', (req, res) => {
   const id = parseInt(req.params.id);
 
-  const data = campingGears.find((item) => item.id === id);
+  const data = campingGears.find(
+    (item) => item.id === id
+  );
 
   if (!data) {
     return res.status(404).json({
@@ -55,7 +74,7 @@ app.get('/camping-gears/:id', (req, res) => {
     });
   }
 
-  res.json(data);
+  res.status(200).json(data);
 });
 
 app.post('/camping-gears', (req, res) => {
@@ -66,6 +85,7 @@ app.post('/camping-gears', (req, res) => {
     hargaSewaPerHari,
     stok
   } = req.body;
+
 
   if (!namaAlat) {
     return res.status(400).json({
@@ -83,7 +103,18 @@ app.post('/camping-gears', (req, res) => {
     });
   }
 
-  if (!hargaSewaPerHari) {
+  if (!kategoriValid.includes(kategori)) {
+    return res.status(400).json({
+      status: "error",
+      message: "Kategori harus tenda, tas, masak, atau penerangan",
+      data: null
+    });
+  }
+
+  if (
+    hargaSewaPerHari === undefined ||
+    hargaSewaPerHari === null
+  ) {
     return res.status(400).json({
       status: "error",
       message: "Field hargaSewaPerHari wajib diisi",
@@ -95,16 +126,6 @@ app.post('/camping-gears', (req, res) => {
     return res.status(400).json({
       status: "error",
       message: "Field stok wajib diisi",
-      data: null
-    });
-  }
-
-  const kategoriValid = ["tenda", "tas", "masak", "penerangan"];
-
-  if (!kategoriValid.includes(kategori)) {
-    return res.status(400).json({
-      status: "error",
-      message: "Kategori harus tenda, tas, masak, atau penerangan",
       data: null
     });
   }
@@ -127,11 +148,12 @@ app.post('/camping-gears', (req, res) => {
   });
 });
 
-// PUT /camping-gears/:id
 app.put('/camping-gears/:id', (req, res) => {
   const id = parseInt(req.params.id);
 
-  const index = campingGears.findIndex((item) => item.id === id);
+  const index = campingGears.findIndex(
+    (item) => item.id === id
+  );
 
   if (index === -1) {
     return res.status(404).json({
@@ -165,7 +187,18 @@ app.put('/camping-gears/:id', (req, res) => {
     });
   }
 
-  if (!hargaSewaPerHari) {
+  if (!kategoriValid.includes(kategori)) {
+    return res.status(400).json({
+      status: "error",
+      message: "Kategori harus tenda, tas, masak, atau penerangan",
+      data: null
+    });
+  }
+
+  if (
+    hargaSewaPerHari === undefined ||
+    hargaSewaPerHari === null
+  ) {
     return res.status(400).json({
       status: "error",
       message: "Field hargaSewaPerHari wajib diisi",
@@ -181,16 +214,6 @@ app.put('/camping-gears/:id', (req, res) => {
     });
   }
 
-  const kategoriValid = ["tenda", "tas", "masak", "penerangan"];
-
-  if (!kategoriValid.includes(kategori)) {
-    return res.status(400).json({
-      status: "error",
-      message: "Kategori harus tenda, tas, masak, atau penerangan",
-      data: null
-    });
-  }
-
   campingGears[index] = {
     id,
     namaAlat,
@@ -200,18 +223,19 @@ app.put('/camping-gears/:id', (req, res) => {
     stok
   };
 
-  res.json({
+  res.status(200).json({
     status: "success",
     message: "Data peralatan kemah berhasil diperbarui",
     data: campingGears[index]
   });
 });
 
-// DELETE /camping-gears/:id
 app.delete('/camping-gears/:id', (req, res) => {
   const id = parseInt(req.params.id);
 
-  const index = campingGears.findIndex((item) => item.id === id);
+  const index = campingGears.findIndex(
+    (item) => item.id === id
+  );
 
   if (index === -1) {
     return res.status(404).json({
@@ -223,13 +247,26 @@ app.delete('/camping-gears/:id', (req, res) => {
 
   const dataDihapus = campingGears.splice(index, 1);
 
-  res.json({
+  res.status(200).json({
     status: "success",
     message: "Data peralatan kemah berhasil dihapus",
     data: dataDihapus[0]
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server berjalan di http://localhost:${PORT}`);
+app.use((req, res) => {
+  res.status(404).json({
+    status: "error",
+    message: "Endpoint tidak ditemukan",
+    data: null
+  });
 });
+
+
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Server berjalan di http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
