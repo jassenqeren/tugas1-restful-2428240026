@@ -98,4 +98,6 @@ https://github.com/jassengeren/tugas1-restful-2428240026
 
 ## Deployment
 
-Link deployment Vercel akan ditambahkan setelah proses deployment selesai.
+Aplikasi dapat diakses melalui link berikut:
+
+https://tugas1-restful-2428240026.vercel.app
