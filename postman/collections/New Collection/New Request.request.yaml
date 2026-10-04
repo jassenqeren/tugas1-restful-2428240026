@@ -1,0 +1,19 @@
+$kind: http-request
+url: http://localhost:3000/camping-gears/1
+method: GET
+body:
+  type: json
+  content: "{\r
+
+    \  \"namaAlat\": \"Tenda Dome 4 Orang\",\r
+
+    \  \"kategori\": \"tenda\",\r
+
+    \  \"kapasitas\": 4,\r
+
+    \  \"hargaSewaPerHari\": 50000,\r
+
+    \  \"stok\": 6\r
+
+    }"
+order: 1791125221900
