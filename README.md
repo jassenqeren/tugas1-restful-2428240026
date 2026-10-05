@@ -94,7 +94,7 @@ http://localhost:3000
 
 Repository GitHub:
 
-https://github.com/jassengeren/tugas1-restful-2428240026
+https://github.com/jassenqeren/tugas1-restful-2428240026
 
 ## Deployment
 
