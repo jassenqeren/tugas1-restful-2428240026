@@ -1,7 +1,7 @@
 {
   "name": "tugas1-restful-camping",
   "version": "1.0.0",
-  "description": "",
+  "description": "Nama: Jassen Nova Tabalujan",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
@@ -15,7 +15,16 @@
   },
   "dependencies": {
     "cors": "^2.8.6",
-    "dotenv": "^18.0.5",
-    "express": "^5.2.1"
-  }
+    "dotenv": "^18.0.6",
+    "express": "^5.2.1",
+    "mongoose": "^9.11.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jassenqeren/tugas1-restful-2428240026.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jassenqeren/tugas1-restful-2428240026/issues"
+  },
+  "homepage": "https://github.com/jassenqeren/tugas1-restful-2428240026#readme"
 }
